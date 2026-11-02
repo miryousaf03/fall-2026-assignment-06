@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { createComment, getComments, updateComment } from '../api';
+import { ApiError, createComment, deleteComment, getComments, updateComment } from '../api';
 import type { ArticleComment } from '../api';
 import CommentForm from './CommentForm';
 import CommentItem from './CommentItem';
@@ -52,6 +52,19 @@ function Comments({ articleId }: CommentsProps) {
     );
   }
 
+  async function handleDelete(commentId: number) {
+    try {
+      await deleteComment(articleId, commentId);
+    } catch (error: unknown) {
+      // A 404 means it's already gone (for example, deleted in another tab),
+      // so we still remove it from the list. Anything else is a real failure.
+      if (!(error instanceof ApiError && error.status === 404)) {
+        throw error;
+      }
+    }
+    setComments((current) => current.filter((comment) => comment.commentId !== commentId));
+  }
+
   return (
     <section>
       <h2>Comments</h2>
@@ -65,7 +78,7 @@ function Comments({ articleId }: CommentsProps) {
       <ul>
         {comments.map((comment) => (
           <li key={comment.commentId}>
-            <CommentItem comment={comment} onUpdate={handleUpdate} />
+            <CommentItem comment={comment} onUpdate={handleUpdate} onDelete={handleDelete} />
           </li>
         ))}
       </ul>
