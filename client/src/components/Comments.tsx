@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { getComments } from '../api';
+import { createComment, getComments } from '../api';
 import type { ArticleComment } from '../api';
+import CommentForm from './CommentForm';
 
 interface CommentsProps {
   articleId: number;
@@ -38,6 +39,11 @@ function Comments({ articleId }: CommentsProps) {
     };
   }, [articleId]);
 
+  async function handleAdd(body: string) {
+    const created = await createComment(articleId, body);
+    setComments((current) => [...current, created]);
+  }
+
   return (
     <section>
       <h2>Comments</h2>
@@ -55,6 +61,8 @@ function Comments({ articleId }: CommentsProps) {
           </li>
         ))}
       </ul>
+
+      <CommentForm submitLabel="Add comment" onSubmit={handleAdd} resetOnSuccess />
     </section>
   );
 }
