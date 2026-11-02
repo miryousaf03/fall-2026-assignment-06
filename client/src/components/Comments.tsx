@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { createComment, getComments } from '../api';
+import { createComment, getComments, updateComment } from '../api';
 import type { ArticleComment } from '../api';
 import CommentForm from './CommentForm';
+import CommentItem from './CommentItem';
 
 interface CommentsProps {
   articleId: number;
@@ -44,6 +45,13 @@ function Comments({ articleId }: CommentsProps) {
     setComments((current) => [...current, created]);
   }
 
+  async function handleUpdate(commentId: number, body: string) {
+    await updateComment(articleId, commentId, body);
+    setComments((current) =>
+      current.map((comment) => (comment.commentId === commentId ? { ...comment, body } : comment)),
+    );
+  }
+
   return (
     <section>
       <h2>Comments</h2>
@@ -57,7 +65,7 @@ function Comments({ articleId }: CommentsProps) {
       <ul>
         {comments.map((comment) => (
           <li key={comment.commentId}>
-            <p style={{ whiteSpace: 'pre-wrap' }}>{comment.body}</p>
+            <CommentItem comment={comment} onUpdate={handleUpdate} />
           </li>
         ))}
       </ul>
