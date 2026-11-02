@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ApiError, deleteArticle, getArticle } from '../api';
 import type { Article } from '../api';
+import Comments from '../components/Comments';
 
 interface ArticleDetailProps {
   articleId: number;
@@ -100,6 +101,8 @@ function ArticleDetail({ articleId }: ArticleDetailProps) {
       </div>
 
       {deleteError !== null && <p role="alert">Could not delete: {deleteError}</p>}
+
+      <Comments articleId={article.articleId} />
     </section>
   );
 }
