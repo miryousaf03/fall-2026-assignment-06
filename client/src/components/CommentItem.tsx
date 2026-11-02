@@ -51,7 +51,7 @@ function CommentItem({ comment, onUpdate, onDelete }: CommentItemProps) {
       <button type="button" onClick={() => setEditing(true)} disabled={deleting}>
         Edit
       </button>
-      <button type="button" onClick={handleDelete} disabled={deleting}>
+      <button type="button" className="danger" onClick={handleDelete} disabled={deleting}>
         {deleting ? 'Deleting…' : 'Delete'}
       </button>
       {deleteError !== null && <p role="alert">Could not delete: {deleteError}</p>}

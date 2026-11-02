@@ -95,7 +95,7 @@ function ArticleDetail({ articleId }: ArticleDetailProps) {
 
       <div>
         <Link to={`/articles/${article.articleId}/edit`}>Edit</Link>
-        <button type="button" onClick={handleDelete} disabled={deleting}>
+        <button type="button" className="danger" onClick={handleDelete} disabled={deleting}>
           {deleting ? 'Deleting…' : 'Delete'}
         </button>
       </div>

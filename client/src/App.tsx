@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <header>
-        <Link to="/">Articles</Link>
+        <Link to="/">Articles & Comments</Link>
       </header>
       <main>
         <Routes>
