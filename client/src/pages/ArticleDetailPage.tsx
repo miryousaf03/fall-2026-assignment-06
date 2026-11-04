@@ -65,7 +65,7 @@ function ArticleDetail({ articleId }: ArticleDetailProps) {
   }
 
   if (loading) {
-    return <p>Loading article…</p>;
+    return <p className="status">Loading article…</p>;
   }
 
   if (errorMessage !== null) {
@@ -93,8 +93,8 @@ function ArticleDetail({ articleId }: ArticleDetailProps) {
       <h1>{article.title}</h1>
       <p style={{ whiteSpace: 'pre-wrap' }}>{article.contents}</p>
 
-      <div>
-        <Link to={`/articles/${article.articleId}/edit`}>Edit</Link>
+      <div className="actions">
+        <Link className="button-link" to={`/articles/${article.articleId}/edit`}>Edit</Link>
         <button type="button" className="danger" onClick={handleDelete} disabled={deleting}>
           {deleting ? 'Deleting…' : 'Delete'}
         </button>

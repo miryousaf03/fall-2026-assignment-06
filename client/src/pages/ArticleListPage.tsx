@@ -53,7 +53,7 @@ function ArticleListPage() {
     <section>
       <h1>Articles</h1>
 
-      <div>
+      <div className="toolbar">
         <input
           type="search"
           placeholder="Search by title..."
@@ -61,15 +61,15 @@ function ArticleListPage() {
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
         />
-        <Link to="/articles/new">Create Article</Link>
+        <Link className="button-link" to="/articles/new">Create Article</Link>
       </div>
 
-      {loading && <p>Loading articles…</p>}
+      {loading && <p className="status">Loading articles…</p>}
 
       {errorMessage !== null && <p role="alert">Could not load articles: {errorMessage}</p>}
 
       {!loading && errorMessage === null && articles.length === 0 && (
-        <p>{hasSearch ? `No articles match "${searchTerm.trim()}".` : 'No articles yet.'}</p>
+        <p className="status">{hasSearch ? `No articles match "${searchTerm.trim()}".` : 'No articles yet.'}</p>
       )}
 
       <ul>

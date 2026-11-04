@@ -51,7 +51,7 @@ function EditArticle({ articleId }: EditArticleProps) {
   }
 
   if (loading) {
-    return <p>Loading article…</p>;
+    return <p className="status">Loading article…</p>;
   }
 
   if (errorMessage !== null || article === null) {

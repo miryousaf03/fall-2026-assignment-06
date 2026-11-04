@@ -69,11 +69,11 @@ function Comments({ articleId }: CommentsProps) {
     <section>
       <h2>Comments</h2>
 
-      {loading && <p>Loading comments…</p>}
+      {loading && <p className="status">Loading comments…</p>}
 
       {errorMessage !== null && <p role="alert">Could not load comments: {errorMessage}</p>}
 
-      {!loading && errorMessage === null && comments.length === 0 && <p>No comments yet.</p>}
+      {!loading && errorMessage === null && comments.length === 0 && <p className="status">No comments yet.</p>}
 
       <ul>
         {comments.map((comment) => (
